@@ -13,8 +13,8 @@ license = { text = "MIT" }
 [project.optional-dependencies]
 dev = ["pytest"]
 
-[project.scripts]
-depsig = "depsig.core:main"
+[project.urls]
+Repository = "https://github.com/noahalexandercampbell/depsig"
 
 [tool.setuptools.packages.find]
 where = ["src"]

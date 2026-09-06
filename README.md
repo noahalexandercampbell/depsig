@@ -2,6 +2,8 @@
 
 Lightweight dependency tree signature and diff tool.
 
+Source: https://github.com/noahalexandercampbell/depsig
+
 ## About
 
 `depsig` scans a directory tree, computes normalized SHA-256 signatures for each text file, and emits a stable project fingerprint. It can also diff two snapshots to detect added, removed, or modified files.
