@@ -11,10 +11,21 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest", "ruff"]
 
 [project.urls]
 Repository = "https://github.com/noahalexandercampbell/depsig"
+Issues = "https://github.com/noahalexandercampbell/depsig/issues"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "W"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

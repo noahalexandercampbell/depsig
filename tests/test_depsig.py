@@ -1,16 +1,13 @@
 from __future__ import annotations
 
-import json
 import os
 import sys
 
-import pytest
+from depsig import diff_signatures, hash_path, hash_tree, tree_signature
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
-
-from depsig import diff_signatures, hash_path, hash_tree, tree_signature
 
 
 def test_hash_path_consistent(tmp_path):

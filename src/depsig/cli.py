@@ -5,8 +5,13 @@ import json
 import os
 import sys
 
-from depsig import Change, diff_signatures, hash_tree, tree_signature
-from depsig.core import _change_to_payload, _render_change
+from depsig.core import (
+    _change_to_payload,
+    _render_change,
+    diff_signatures,
+    hash_tree,
+    tree_signature,
+)
 
 
 class _HelpArgs:
@@ -18,10 +23,18 @@ def _build_parser() -> argparse.ArgumentParser:
         description="Compute and compare dependency tree signatures."
     )
     parser.add_argument("root", nargs="?", default=".", help="Root directory to scan")
-    parser.add_argument("--signature", action="store_true", help="Print the current tree signature")
-    parser.add_argument("--json", action="store_true", help="Emit JSON machine-readable output")
-    parser.add_argument("--old", metavar="PATH", help="Previous tree signature JSON file for diff")
-    parser.add_argument("--out", metavar="PATH", help="Write current tree entries to a JSON file")
+    parser.add_argument(
+        "--signature", action="store_true", help="Print the current tree signature"
+    )
+    parser.add_argument(
+        "--json", action="store_true", help="Emit JSON machine-readable output"
+    )
+    parser.add_argument(
+        "--old", metavar="PATH", help="Previous tree signature JSON file for diff"
+    )
+    parser.add_argument(
+        "--out", metavar="PATH", help="Write current tree entries to a JSON file"
+    )
     return parser
 
 
@@ -51,7 +64,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.out:
         try:
             with open(args.out, "w", encoding="utf-8") as file:
-                json.dump({"signature": signature, "entries": entries}, file, indent=2, sort_keys=True)
+                json.dump(
+                    {"signature": signature, "entries": entries},
+                    file,
+                    indent=2,
+                    sort_keys=True,
+                )
         except OSError as exc:
             print(f"error: {exc}", file=sys.stderr)
             return 1
@@ -61,7 +79,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"error: {args.old} does not exist", file=sys.stderr)
             return 1
         try:
-            with open(args.old, "r", encoding="utf-8") as file:
+            with open(args.old, encoding="utf-8") as file:
                 old_payload = json.load(file)
         except (OSError, json.JSONDecodeError) as exc:
             print(f"error: {exc}", file=sys.stderr)
